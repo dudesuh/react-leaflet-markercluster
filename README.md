@@ -1,4 +1,8 @@
-# React leaflet markercluster
+# dudesuh/React leaflet markercluster
+
+This is a forked version of [YUzhva/react-leaflet-markercluster](
+https://github.com/YUzhva/react-leaflet-markercluster) v1.1.8 and adds support for other cluster leaflet events like onClusterMouseDown, onClusterMouseUp, etc, instead of only onClusterClick.
+
 [![npm](https://img.shields.io/npm/v/react-leaflet-markercluster.svg)](
   https://www.npmjs.com/package/react-leaflet-markercluster)
 [![Code Climate](https://codeclimate.com/github/YUzhva/react-leaflet-markercluster/badges/gpa.svg)](
@@ -114,7 +118,7 @@ P.S: old examples are available at [CHANGELOG.md](./CHANGELOG.md#v118)
 
 **Event listeners:**
 + `onMarkerClick: function`
-+ `onClusterClick: function`
++ `onCluster%LeafletEvent%: function`
 + `onPopupClose: function`
 
 **Deprecated since v1.1.8 API:**
