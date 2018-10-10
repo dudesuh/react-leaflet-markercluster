@@ -114,23 +114,24 @@ export default class MarkerClusterGroup extends LayerGroup {
   }
 
   initEventListeners(markerClusterGroup) {
-    if (this.props.onMarkerClick) {
-      markerClusterGroup.on('click', (marker) => {
-        this.props.onMarkerClick(marker.layer);
-      });
-    }
+    Object.keys(this.props).forEach(prop => {
+      if (prop === 'onMarkerClick') {
+        markerClusterGroup.on('click', (marker) => {
+          this.props.onMarkerClick(marker.layer);
+        });
+      }
+      if (prop === 'onPopupClose') {
+        markerClusterGroup.on('popupclose', (map) => {
+          this.props.onPopupClose(map.popup);
+        });
+      }
 
-    if (this.props.onClusterClick) {
-      markerClusterGroup.on('clusterclick', (cluster) => {
-        this.props.onClusterClick(cluster.layer);
-      });
-    }
-
-    if (this.props.onPopupClose) {
-      markerClusterGroup.on('popupclose', (map) => {
-        this.props.onPopupClose(map.popup);
-      });
-    }
+      if (prop.includes('onCluster')) {
+        markerClusterGroup.on(prop.substring(2).toLowerCase(), (cluster) => {
+          this.props[prop](cluster.layer);
+        });
+      }
+    })
   }
 
   getLeafletElement() {

@@ -13,7 +13,6 @@
     "lint:scss": "stylelint 'src/**/*.scss' --syntax=scss",
     "lint:staged": "lint-staged"
   },
-  "pre-commit": "lint:staged",
   "lint-staged": {
     "*.js": "lint:js",
     "*.scss": "stylelint --syntax=scss"

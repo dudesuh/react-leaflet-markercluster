@@ -151,23 +151,24 @@ var MarkerClusterGroup = function (_LayerGroup) {
     value: function initEventListeners(markerClusterGroup) {
       var _this2 = this;
 
-      if (this.props.onMarkerClick) {
-        markerClusterGroup.on('click', function (marker) {
-          _this2.props.onMarkerClick(marker.layer);
-        });
-      }
+      Object.keys(this.props).forEach(function (prop) {
+        if (prop === 'onMarkerClick') {
+          markerClusterGroup.on('click', function (marker) {
+            _this2.props.onMarkerClick(marker.layer);
+          });
+        }
+        if (prop === 'onPopupClose') {
+          markerClusterGroup.on('popupclose', function (map) {
+            _this2.props.onPopupClose(map.popup);
+          });
+        }
 
-      if (this.props.onClusterClick) {
-        markerClusterGroup.on('clusterclick', function (cluster) {
-          _this2.props.onClusterClick(cluster.layer);
-        });
-      }
-
-      if (this.props.onPopupClose) {
-        markerClusterGroup.on('popupclose', function (map) {
-          _this2.props.onPopupClose(map.popup);
-        });
-      }
+        if (prop.includes('onCluster')) {
+          markerClusterGroup.on(prop.substring(2).toLowerCase(), function (cluster) {
+            _this2.props[prop](cluster.layer);
+          });
+        }
+      });
     }
   }, {
     key: 'getLeafletElement',
